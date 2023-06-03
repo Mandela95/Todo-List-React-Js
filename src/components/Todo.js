@@ -130,7 +130,6 @@ export default function Todo({ todo, handleCheck }) {
             }}
           />
           <TextField
-            style={{ wordWrap: "break-word", overflowWrap: "anywhere" }}
             autoFocus
             margin="dense"
             id="name"
@@ -170,6 +169,7 @@ export default function Todo({ todo, handleCheck }) {
               <Typography
                 variant="h5"
                 sx={{
+                  wordWrap: "break-word",
                   textAlign: "left",
                   textDecoration: todo.isCompleted ? "line-through" : "none",
                 }}
