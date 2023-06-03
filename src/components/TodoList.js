@@ -78,9 +78,16 @@ export default function TodoList() {
   return (
     <>
       <Container maxWidth="sm">
-        <Card className="cardContainer" sx={{ minWidth: 275, maxHeight: "90vh", overflowY: "scroll" }}>
+        <Card
+          className="cardContainer"
+          sx={{ minWidth: 275, maxHeight: "90vh", overflowY: "scroll" }}
+        >
           <CardContent>
-            <Typography variant="h2" style={{ color: "#9c27b0" }}>
+            <Typography
+              className="todoTitle"
+              variant="h2"
+              style={{ color: "#9c27b0" }}
+            >
               Todos
             </Typography>
 
@@ -88,20 +95,32 @@ export default function TodoList() {
 
             {/* Filter Buttons */}
             <ToggleButtonGroup
-              style={{ margin: "15px" }}
+              style={{ margin: "10px" }}
               color="primary"
               value={displayedTodosType}
               exclusive
               onChange={changeDisplayedType}
             >
-              <ToggleButton sx={{ fontSize: "1.5rem" }} value="all">
+              <ToggleButton
+                className="toggleBtn"
+                sx={{ fontSize: "1.5rem" }}
+                value="all"
+              >
                 All
               </ToggleButton>
-              <ToggleButton sx={{ fontSize: "1.5rem" }} value="completed">
+              <ToggleButton
+                className="toggleBtn"
+                sx={{ fontSize: "1.5rem" }}
+                value="completed"
+              >
                 Done
               </ToggleButton>
-              <ToggleButton sx={{ fontSize: "1.5rem" }} value="inProgress">
-                In Progress...
+              <ToggleButton
+                className="toggleBtn"
+                sx={{ fontSize: "1.5rem" }}
+                value="inProgress"
+              >
+                In Progress
               </ToggleButton>
             </ToggleButtonGroup>
             {/* Filter Buttons */}

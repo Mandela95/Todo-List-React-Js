@@ -110,4 +110,10 @@
   .card {
     display: block !important;
     }
+    .todoTitle {
+      font-size: 50px !important;
+    }
+    .toggleBtn {
+      font-size: 20px !important;
+    }
 }
