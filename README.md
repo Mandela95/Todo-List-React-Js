@@ -1,3 +1,17 @@
+Live-server: https://mandela95.github.io/Todo-List-React-Js/
+
+![Todos(All Todo)](https://raw.githubusercontent.com/Mandela95/Todo-List-React-Js/main/Images/1%20-%20All.png)
+
+![Todos(Done)](https://avatars.githubusercontent.com/u/96991597?v=4)
+
+![Todos(In Progress)](https://avatars.githubusercontent.com/u/96991597?v=4)
+
+![Todos(Add New Todo)](https://avatars.githubusercontent.com/u/96991597?v=4)
+
+Mobile-Friendly:
+
+![Todos(Mobile)](https://avatars.githubusercontent.com/u/96991597?v=4)
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
