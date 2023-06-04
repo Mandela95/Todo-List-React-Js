@@ -1,19 +1,19 @@
 {
   "files": {
-    "main.css": "/Todo-List-React-Js/static/css/main.9bde94d1.css",
-    "main.js": "/Todo-List-React-Js/static/js/main.d8e2932c.js",
+    "main.css": "/Todo-List-React-Js/static/css/main.cc27dbfc.css",
+    "main.js": "/Todo-List-React-Js/static/js/main.0aabacd0.js",
     "static/js/787.5208a524.chunk.js": "/Todo-List-React-Js/static/js/787.5208a524.chunk.js",
     "static/media/Cairo-Black.ttf": "/Todo-List-React-Js/static/media/Cairo-Black.540ea986471a33afaa57.ttf",
     "static/media/Cairo-Bold.ttf": "/Todo-List-React-Js/static/media/Cairo-Bold.1bdbe4b9eb69be116971.ttf",
     "static/media/Cairo-Regular.ttf": "/Todo-List-React-Js/static/media/Cairo-Regular.318c781c17841e4a9f45.ttf",
     "static/media/Cairo-Light.ttf": "/Todo-List-React-Js/static/media/Cairo-Light.d95b4c20716d0b025366.ttf",
     "index.html": "/Todo-List-React-Js/index.html",
-    "main.9bde94d1.css.map": "/Todo-List-React-Js/static/css/main.9bde94d1.css.map",
-    "main.d8e2932c.js.map": "/Todo-List-React-Js/static/js/main.d8e2932c.js.map",
+    "main.cc27dbfc.css.map": "/Todo-List-React-Js/static/css/main.cc27dbfc.css.map",
+    "main.0aabacd0.js.map": "/Todo-List-React-Js/static/js/main.0aabacd0.js.map",
     "787.5208a524.chunk.js.map": "/Todo-List-React-Js/static/js/787.5208a524.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.9bde94d1.css",
-    "static/js/main.d8e2932c.js"
+    "static/css/main.cc27dbfc.css",
+    "static/js/main.0aabacd0.js"
   ]
 }
