@@ -167,7 +167,8 @@ export default function Todo({ todo, handleCheck }) {
           <Grid container spacing={2}>
             <Grid xs={8}>
               <Typography
-                variant="h5"
+              
+                variant="h6"
                 sx={{
                   wordWrap: "break-word",
                   textAlign: "left",
