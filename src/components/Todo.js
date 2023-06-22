@@ -158,16 +158,12 @@ export default function Todo({ todo, handleCheck }) {
         className="todoCard"
         sx={{
           minWidth: 275,
-          backgroundColor: "#9c27b0",
-          color: "#fff",
-          margin: "20px 0",
         }}
       >
         <CardContent>
           <Grid container spacing={2}>
             <Grid xs={8}>
               <Typography
-              
                 variant="h6"
                 sx={{
                   wordWrap: "break-word",
@@ -181,8 +177,6 @@ export default function Todo({ todo, handleCheck }) {
                 variant="h6"
                 sx={{
                   textAlign: "left",
-                  backgroundColor:
-                    updatedTodo.details === "" ? "" : "lightblue",
                   padding: "5px",
                   borderRadius: "4px",
                   wordWrap: "break-word",

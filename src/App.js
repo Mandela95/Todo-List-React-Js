@@ -1,6 +1,6 @@
 import "./App.css";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
-import { purple, deepPurple } from "@mui/material/colors";
+import { grey, blueGrey } from "@mui/material/colors";
 import TodoList from "./components/TodoList";
 import { TodosContext } from "./contexts/TodosContext";
 import { v4 as uuid } from "uuid";
@@ -9,10 +9,10 @@ import { useState } from "react";
 const theme = createTheme({
   palette: {
     primary: {
-      main: purple[500],
+      main: grey[500],
     },
     secondary: {
-      main: deepPurple[900],
+      main: blueGrey[900],
     },
   },
   typography: {
@@ -49,16 +49,7 @@ function App() {
 
   return (
     <ThemeProvider theme={theme}>
-      <div
-        className="App"
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          minHeight: "100vh",
-          backgroundColor: "#9c27b0",
-        }}
-      >
+      <div className="App">
         <TodosContext.Provider value={{ todos, setTodos }}>
           <TodoList />
         </TodosContext.Provider>
