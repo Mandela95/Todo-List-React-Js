@@ -11,7 +11,7 @@ import Grid from "@mui/material/Unstable_Grid2";
 import Todo from "./Todo";
 // Others
 import { TodosContext } from "../contexts/TodosContext";
-import { useState, useContext, useEffect } from "react";
+import { useState, useContext, useEffect, useMemo } from "react";
 import { v4 as uuid } from "uuid";
 
 export default function TodoList() {
@@ -23,13 +23,17 @@ export default function TodoList() {
   const [displayedTodosType, setDisplayedTodosType] = useState("all");
 
   // filteration arrays
-  const completedTodos = todos.filter((t) => {
-    return t.isCompleted;
-  });
+  const completedTodos = useMemo(() => {
+    return todos.filter((t) => {
+      return t.isCompleted;
+    });
+  }, [todos]);
 
-  const inProgressTodos = todos.filter((t) => {
-    return !t.isCompleted;
-  });
+  const inProgressTodos = useMemo(() => {
+    return todos.filter((t) => {
+      return !t.isCompleted;
+    });
+  }, [todos]);
 
   let todosToBeRendered = todos;
   if (displayedTodosType === "completed") {
@@ -83,12 +87,8 @@ export default function TodoList() {
           sx={{ minWidth: 275, maxHeight: "90vh", overflowY: "scroll" }}
         >
           <CardContent>
-            <Typography
-              className="todoTitle"
-              variant="h2"
-              style={{ color: "#9c27b0" }}
-            >
-              Todos
+            <Typography className="todoTitle" variant="h2">
+              To-Do
             </Typography>
 
             <Divider />
@@ -96,7 +96,6 @@ export default function TodoList() {
             {/* Filter Buttons */}
             <ToggleButtonGroup
               style={{ margin: "10px" }}
-              color="primary"
               value={displayedTodosType}
               exclusive
               onChange={changeDisplayedType}
