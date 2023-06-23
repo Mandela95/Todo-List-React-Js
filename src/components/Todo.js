@@ -145,6 +145,7 @@ export default function Todo({ todo, handleCheck }) {
         <DialogActions>
           <Button onClick={handleUpdateDialogClose}>Close</Button>
           <Button
+            style={{ color: "blue" }}
             onClick={handleUpdateConfirm}
             disabled={updatedTodo.title.length === 0}
           >

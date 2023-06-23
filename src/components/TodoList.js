@@ -125,7 +125,7 @@ export default function TodoList() {
             {/* Filter Buttons */}
 
             {/* All Todos */}
-            {todosList}
+            {todosList.length >= 1 ? todosList : <p>There's nothing to show</p>}
             {/* All Todos */}
 
             {/* Input + Add button */}
