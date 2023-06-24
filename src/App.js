@@ -5,6 +5,8 @@ import TodoList from "./components/TodoList";
 import { TodosContext } from "./contexts/TodosContext";
 import { v4 as uuid } from "uuid";
 import { useState } from "react";
+import MySnackBar from "./components/MySnackBar";
+import { ToastContext } from "./contexts/ToastContext";
 
 const theme = createTheme({
   palette: {
@@ -46,14 +48,26 @@ const initialTodos = [
 
 function App() {
   const [todos, setTodos] = useState(initialTodos);
+  const [open, setOpen] = useState(false);
+  const [message, setMessage] = useState("");
 
+  function showHideToast(message) {
+    setOpen(true);
+    setMessage(message);
+    setTimeout(() => {
+      setOpen(false);
+    }, 3000);
+  }
   return (
     <ThemeProvider theme={theme}>
-      <div className="App">
-        <TodosContext.Provider value={{ todos, setTodos }}>
-          <TodoList />
-        </TodosContext.Provider>
-      </div>
+      <ToastContext.Provider value={{ showHideToast }}>
+        <div className="App">
+          <MySnackBar open={open} message={message} />
+          <TodosContext.Provider value={{ todos, setTodos }}>
+            <TodoList />
+          </TodosContext.Provider>
+        </div>
+      </ToastContext.Provider>
     </ThemeProvider>
   );
 }

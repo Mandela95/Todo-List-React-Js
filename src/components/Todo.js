@@ -10,6 +10,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 
 import { useContext, useState } from "react";
 import { TodosContext } from "../contexts/TodosContext";
+import { ToastContext } from "../contexts/ToastContext";
 
 // Dialog
 import Button from "@mui/material/Button";
@@ -20,7 +21,7 @@ import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import { TextField } from "@mui/material";
 
-export default function Todo({ todo, handleCheck }) {
+export default function Todo({ todo }) {
   const [showDeleteDialog, setShowDeleteDialog] = useState(false);
   const [showUpdateDialog, setShowUpdateDialog] = useState(false);
   const [updatedTodo, setUpdatedTodo] = useState({
@@ -28,6 +29,7 @@ export default function Todo({ todo, handleCheck }) {
     details: todo.details,
   });
   const { todos, setTodos } = useContext(TodosContext);
+  const { showHideToast } = useContext(ToastContext);
 
   // Event Handlers
   function handleCheckClick() {
@@ -40,24 +42,7 @@ export default function Todo({ todo, handleCheck }) {
     setTodos(updatedTodos);
     // add changes to local storage
     localStorage.setItem("todos", JSON.stringify(updatedTodos));
-  }
-
-  // delete
-  function handleDeleteClick() {
-    setShowDeleteDialog(true);
-  }
-
-  function handleDeleteDialogClose() {
-    setShowDeleteDialog(false);
-  }
-
-  function handleDeleteConfirm() {
-    const updatedTodos = todos.filter((t) => {
-      return t.id !== todo.id;
-    });
-    setTodos(updatedTodos);
-    // add changes to local storage
-    localStorage.setItem("todos", JSON.stringify(updatedTodos));
+    showHideToast(todo.isCompleted ? "Completed" : "Not Completed Yet");
   }
 
   // update
@@ -83,6 +68,26 @@ export default function Todo({ todo, handleCheck }) {
     setShowUpdateDialog(false);
     // add changes to local storage
     localStorage.setItem("todos", JSON.stringify(updatedTodos));
+    showHideToast("To-Do Updated Successfully");
+  }
+
+  // delete
+  function handleDeleteClick() {
+    setShowDeleteDialog(true);
+  }
+
+  function handleDeleteDialogClose() {
+    setShowDeleteDialog(false);
+  }
+
+  function handleDeleteConfirm() {
+    const updatedTodos = todos.filter((t) => {
+      return t.id !== todo.id;
+    });
+    setTodos(updatedTodos);
+    // add changes to local storage
+    localStorage.setItem("todos", JSON.stringify(updatedTodos));
+    showHideToast("To-Do Deleted");
   }
 
   // Event Handlers
@@ -145,6 +150,7 @@ export default function Todo({ todo, handleCheck }) {
         <DialogActions>
           <Button onClick={handleUpdateDialogClose}>Close</Button>
           <Button
+            style={{ color: updatedTodo.title !== "" ? "blue" : "#9e9e9e" }}
             onClick={handleUpdateConfirm}
             disabled={updatedTodo.title.length === 0}
           >

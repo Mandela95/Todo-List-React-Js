@@ -24,12 +24,10 @@
 }
 
 .iconButton {
-  /* margin: 5px !important; */
   transition: all .3s !important;
 }
 
 .iconButton:hover {
-  /* background-color: #ddd !important; */
   box-shadow: 0 7px 7px rgba(0, 0, 0, .4);
 }
 
@@ -42,7 +40,6 @@
 
 .todoCard:hover {
   padding: 2px 0;
-  /* border: 2px solid purple; */
   box-shadow: 0 7px 7px rgba(0, 0, 0, .4);
 }
 

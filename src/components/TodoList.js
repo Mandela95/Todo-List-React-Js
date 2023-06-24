@@ -1,9 +1,19 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import * as React from "react";
 import Container from "@mui/material/Container";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
-import { Button, Divider, TextField } from "@mui/material";
+import {
+  Button,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
+  Divider,
+  TextField,
+} from "@mui/material";
 import ToggleButton from "@mui/material/ToggleButton";
 import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
 import Grid from "@mui/material/Unstable_Grid2";
@@ -11,14 +21,19 @@ import Grid from "@mui/material/Unstable_Grid2";
 import Todo from "./Todo";
 // Others
 import { TodosContext } from "../contexts/TodosContext";
+import { ToastContext } from "../contexts/ToastContext";
 import { useState, useContext, useEffect, useMemo } from "react";
 import { v4 as uuid } from "uuid";
 
 export default function TodoList() {
+  const { todos, setTodos } = useContext(TodosContext);
+  const { showHideToast } = useContext(ToastContext);
+  const [dialogTodo, setDialogTodo] = useState(null);
+  const [showDeleteDialog, setShowDeleteDialog] = useState(false);
+  const [showUpdateDialog, setShowUpdateDialog] = useState(false);
+
   const [titleInput, setTitleInput] = useState("");
   const [detailsInput, setDetailsInput] = useState("");
-
-  const { todos, setTodos } = useContext(TodosContext);
 
   const [displayedTodosType, setDisplayedTodosType] = useState("all");
 
@@ -44,16 +59,12 @@ export default function TodoList() {
     todosToBeRendered = todos;
   }
 
-  const todosList = todosToBeRendered.map((t) => {
-    return <Todo key={t.id} todo={t} />;
-  });
-
   useEffect(() => {
     const storageTodos = JSON.parse(localStorage.getItem("todos")) ?? [];
     setTodos(storageTodos);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  // HANDLERS
   function changeDisplayedType(e) {
     setDisplayedTodosType(e.target.value);
   }
@@ -70,17 +81,128 @@ export default function TodoList() {
     localStorage.setItem("todos", JSON.stringify(updatedTodos));
     setTitleInput("");
     setDetailsInput("");
+    showHideToast("New To-Do Added Successfully");
   }
 
-  // Add Todo when pressing enter
-  // window.addEventListener("keyup", (e) => {
-  //   if (e.keyCode === 13) {
-  //     handleAddClick();
-  //   }
-  // });
+  // update
+
+  function openUpdateDialog(todo) {
+    setDialogTodo(todo);
+    setShowUpdateDialog(true);
+  }
+
+  function handleUpdateDialogClose() {
+    setShowUpdateDialog(false);
+  }
+
+  function handleUpdateConfirm() {
+    const updatedTodos = todos.map((t) => {
+      if (t.id === dialogTodo.id) {
+        return { ...t, title: dialogTodo.title, details: dialogTodo.details };
+      } else {
+        return t;
+      }
+    });
+    setTodos(updatedTodos);
+    setShowUpdateDialog(false);
+    // add changes to local storage
+    localStorage.setItem("todos", JSON.stringify(updatedTodos));
+  }
+
+  // delete
+
+  function openDeleteDialog(todo) {
+    setDialogTodo(todo);
+    setShowDeleteDialog(true);
+  }
+
+  function handleDeleteDialogClose() {
+    setShowDeleteDialog(false);
+  }
+
+  function handleDeleteConfirm() {
+    const updatedTodos = todos.filter((t) => {
+      return t.id !== dialogTodo.id;
+    });
+    setTodos(updatedTodos);
+    // add changes to local storage
+    localStorage.setItem("todos", JSON.stringify(updatedTodos));
+    setShowDeleteDialog(false);
+  }
+
+  const todosList = todosToBeRendered.map((t) => {
+    return (
+      <Todo
+        key={t.id}
+        todo={t}
+        showDelete={openDeleteDialog}
+        showUpdate={openUpdateDialog}
+      />
+    );
+  });
 
   return (
     <>
+      {/* Edit Dialog */}
+      <Dialog open={showUpdateDialog} onClose={handleUpdateDialogClose}>
+        <DialogTitle id="alert-dialog-title">{"Update Todo"}</DialogTitle>
+        <DialogContent>
+          <TextField
+            autoFocus
+            margin="dense"
+            id="name"
+            label="Update Todo Title"
+            fullWidth
+            variant="standard"
+            // value={dialogTodo.title}
+            onChange={(e) => {
+              setDialogTodo({ ...dialogTodo, title: e.target.value });
+            }}
+          />
+          <TextField
+            autoFocus
+            margin="dense"
+            id="name"
+            label="Update Todo Details"
+            fullWidth
+            variant="standard"
+            // value={dialogTodo.details}
+            onChange={(e) => {
+              setDialogTodo({ ...dialogTodo, details: e.target.value });
+            }}
+          />
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleUpdateDialogClose}>Close</Button>
+          <Button onClick={handleUpdateConfirm}>Update</Button>
+        </DialogActions>
+      </Dialog>
+      {/* Edit Dialog */}
+
+      {/* Delete Dialog */}
+      <Dialog
+        open={showDeleteDialog}
+        onClose={handleDeleteDialogClose}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle id="alert-dialog-title">
+          {"Are you sure you want to delete this Todo ?"}
+        </DialogTitle>
+        <DialogContent>
+          <DialogContentText id="alert-dialog-description">
+            You can't undone this...
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleDeleteDialogClose}>Cancel</Button>
+          <Button style={{ color: "red" }} onClick={handleDeleteConfirm}>
+            Delete
+          </Button>
+        </DialogActions>
+      </Dialog>
+      {/* Delete Dialog */}
+
       <Container maxWidth="sm">
         <Card
           className="cardContainer"
@@ -125,7 +247,7 @@ export default function TodoList() {
             {/* Filter Buttons */}
 
             {/* All Todos */}
-            {todosList}
+            {todosList.length >= 1 ? todosList : <p>There's nothing to show</p>}
             {/* All Todos */}
 
             {/* Input + Add button */}
@@ -171,7 +293,7 @@ export default function TodoList() {
                     handleAddClick();
                   }}
                   color="secondary"
-                  disabled={titleInput.length === 0}
+                  disabled={titleInput.trim() === ""}
                 >
                   Add
                 </Button>
@@ -185,3 +307,10 @@ export default function TodoList() {
     </>
   );
 }
+
+// Add Todo when pressing enter
+// window.addEventListener("keyup", (e) => {
+//   if (e.keyCode === 13) {
+//     handleAddClick();
+//   }
+// });
