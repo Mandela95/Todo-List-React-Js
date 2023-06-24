@@ -60,6 +60,7 @@ function App() {
   }
   return (
     <ThemeProvider theme={theme}>
+<<<<<<< HEAD
       <ToastContext.Provider value={{ showHideToast }}>
         <div className="App">
           <MySnackBar open={open} message={message} />
@@ -68,6 +69,13 @@ function App() {
           </TodosContext.Provider>
         </div>
       </ToastContext.Provider>
+=======
+      <div className="App">
+        <TodosContext.Provider value={{ todos, setTodos }}>
+          <TodoList />
+        </TodosContext.Provider>
+      </div>
+>>>>>>> 1d9ddc9fd964689386028c1a6c22746d7be646f0
     </ThemeProvider>
   );
 }

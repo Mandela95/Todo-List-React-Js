@@ -21,8 +21,7 @@ import Grid from "@mui/material/Unstable_Grid2";
 import Todo from "./Todo";
 // Others
 import { TodosContext } from "../contexts/TodosContext";
-import { ToastContext } from "../contexts/ToastContext";
-import { useState, useContext, useEffect, useMemo } from "react";
+import { useState, useContext, useEffect } from "react";
 import { v4 as uuid } from "uuid";
 
 export default function TodoList() {
@@ -307,10 +306,3 @@ export default function TodoList() {
     </>
   );
 }
-
-// Add Todo when pressing enter
-// window.addEventListener("keyup", (e) => {
-//   if (e.keyCode === 13) {
-//     handleAddClick();
-//   }
-// });
