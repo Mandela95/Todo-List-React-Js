@@ -21,8 +21,9 @@ import Grid from "@mui/material/Unstable_Grid2";
 import Todo from "./Todo";
 // Others
 import { TodosContext } from "../contexts/TodosContext";
-import { useState, useContext, useEffect } from "react";
+import { useState, useContext, useEffect, useMemo } from "react";
 import { v4 as uuid } from "uuid";
+import { ToastContext } from "../contexts/ToastContext";
 
 export default function TodoList() {
   const { todos, setTodos } = useContext(TodosContext);
