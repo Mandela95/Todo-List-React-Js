@@ -1,14 +1,12 @@
 Live-server: https://mandela95.github.io/Todo-List-React-Js/
 
-![Todos(All Todo)](https://raw.githubusercontent.com/Mandela95/Todo-List-React-Js/main/Images/1%20-%20All.png)
+![Todos(All Todo)](https://github.com/Mandela95/Todo-List-React-Js/blob/main/Images/All.png?raw=true)
 
-![Todos(Done)](https://raw.githubusercontent.com/Mandela95/Todo-List-React-Js/main/Images/2%20-%20Done.png)
+![Todos(Done)](https://github.com/Mandela95/Todo-List-React-Js/blob/main/Images/Done.png?raw=true)
 
-![Todos(In Progress)](https://raw.githubusercontent.com/Mandela95/Todo-List-React-Js/main/Images/3%20-%20In%20Progress.png)
-
-![Todos(Add New Todo)](https://raw.githubusercontent.com/Mandela95/Todo-List-React-Js/main/Images/Add%20New%20Todo.png)
+![Todos(Add New Todo)](https://github.com/Mandela95/Todo-List-React-Js/blob/main/Images/Add%20New%20To-Do.png?raw=true)
 
 Mobile-Friendly:
 
-![Todos(Mobile)](https://raw.githubusercontent.com/Mandela95/Todo-List-React-Js/main/Images/Mobile.png)
+![Todos(Mobile)](https://github.com/Mandela95/Todo-List-React-Js/blob/main/Images/Mobile.png?raw=true)
 
